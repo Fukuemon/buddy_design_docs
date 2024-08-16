@@ -15,6 +15,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz openjdk-11-jdk
+          sudo apt-get install -y plantuml
           cargo install mdbook mdbook-plantuml
 
       - name: Build the book
