@@ -3,7 +3,7 @@
 ## 全体図
 
 ```plantuml
-!include ./er.puml
+!include src/ER/er.puml
 ```
 
 ## tables
