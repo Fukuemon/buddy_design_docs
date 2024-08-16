@@ -1,0 +1,37 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 経営データ {
+  entity labor_managements {
+    * ulid id <<PK>>
+    --
+    int facility_id <<FK>> "施設ID"
+    ulid monthly_labor_management_id <<FK>> "月次経営データID"
+    string name "経営数値の項目名"
+    int data "データ"
+
+  }
+
+  note bottom of labor_managements
+  算出はサーバーで行い、計算されたデータのみを保存する
+  end note
+
+  entity manthry_labor_managements {
+    * ulid id <<PK>>
+    --
+    int facility_id <<FK>> "施設ID"
+    date month "月"
+  }
+}
+
+package 施設情報 {
+  entity facilities {
+  }
+}
+
+
+manthry_labor_managements ||--o{ labor_managements
+manthry_labor_managements ||--|| facilities
+labor_managements ||--|| facilities
+
+@enduml

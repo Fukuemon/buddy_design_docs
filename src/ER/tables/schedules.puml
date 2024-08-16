@@ -1,0 +1,182 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 予定 {
+  entity schedules {
+    * binary schedule_id <<PK>>
+    --
+    binary user_id "ユーザーID"
+    string title "予定のタイトル"
+    binary schedule_type_id <<FK>> "予定の種類"
+    binary schedule_category_id <<FK>> "予定のカテゴリ"
+    binary recurring_schedule_id <<FK>>"繰り返し予定ID（NULL_OK)"
+    binary visit_info_id <<FK>> "訪問情報ID"
+    string description "予定の説明"
+    datetime startDate "開始時間"
+    datetime endDate "終了時間"
+    boolean is_cancelled"キャンセルされたかどうか"
+    boolean is_overtime_work "時間外勤務か"
+    boolean is_modified "変更されたかどうか"
+    date created_at
+    date updated_at
+  }
+
+  note bottom of schedules
+    繰り返し予定で特定の予定のみ変更された場合、
+    このテーブルに新しいレコードを追加する
+    予定を入れれるか判断する際に、繰り返し予定IDを参照し、
+
+  end note
+
+
+  entity schedule_types {
+    * binary schedule_type_id <<PK>>
+    --
+    string name "予定のタイプ名"
+  }
+
+  note bottom of schedule_types
+    1: 通常業務
+    2: 通常業務繰り返し
+    3: 訪問
+    4: 繰り返し訪問
+  end note
+
+  entity schedule_categories {
+    * binary id <<PK>>
+    --
+    string name "予定のカテゴリ"
+  }
+
+  note bottom of schedule_categories
+  緊急訪問件数・入院件数をカウントする
+  複数選択するかどうかで、多:多の関係になる
+    1:通常
+    2:緊急
+    3:入院
+    ...
+  end note
+
+  entity schedule_cancels {
+    * binary id <<PK>>
+    --
+    binary schedule_id <<FK>> "キャンセルされた予定ID"
+    string cancel_reason "キャンセル理由"
+    date cancel_date "キャンセル日時"
+  }
+
+  entity schedule_histories {
+    * binary id <<PK>>
+    --
+    binary schedule_id <<FK>>
+    string changed_field "変更されたフィールド"
+    string old_value "変更前の値"
+    string new_value "変更後の値"
+    datetime change_date "変更日時"
+    string change_reason "変更理由"
+  }
+  note top of schedule_histories
+    一つの予定に対して複数の更新履歴がある
+    1つの変更には一つの値しか変更されない
+  end note
+
+  entity visit_info {
+    * binary visit_info_id <<PK>>
+    --
+    binary patient_id <<FK>> "患者ID"
+    binary route_id <<FK>> "ルートID"
+    binary service_code_id <<FK>> "サービスコードID"
+    int service_time "提供時間"
+  }
+
+  entity service_codes {
+    * binary id <<PK>>
+    --
+    string code "サービスコード"
+    int service_time "提供時間"
+  }
+  note bottom of service_codes
+    コードIDに応じてサービスコードを設定
+    1. 訪看I2
+    2. 訪看I3
+    ...
+  end note
+
+
+  entity routes {
+    * binary id <<PK>>
+    --
+    int travel_time "移動時間"
+    binary address_id <<FK>> "出発地の住所ID"
+    binary destination_id <<FK>> "目的地の住所ID"
+  }
+
+  note bottom of routes
+    出発地と目的地は、addressテーブルに対応させる？
+    ...
+  end note
+
+  entity reccuring_types {
+    binary recurring_rule_id <<PK>>
+    --
+    binary schedule_id: スケジュールID <<FK>>
+    int frequency: "繰り返し頻度"
+    int interval: "繰り返し間隔"
+    int day_of_week: "曜日"
+    int day_of_month: "月の日"
+    int week_of_month: "月の週"
+    int start_date: "開始日"
+    int end_date: "終了日"
+  }
+  note top of reccuring_types
+  繰り返し予定のルールを定義する
+  end note
+
+  entity recurring_schedules {
+    binary recurring_schedule_id <<PK>>
+    --
+    binary recurring_rule_id: "繰り返しルールID"
+    binary schedule_type_id: "予定タイプID"
+    binary visit_info_id: "訪問情報ID"
+    binary schedule_category_id: "予定カテゴリID"
+    title: "タイトル"
+    description: "説明"
+    start_time: "開始時間"
+    end_time: "終了時間"
+  }
+  note top of recurring_schedules
+    繰り返し予定の情報を保存する
+    繰り返しタイプに基づいて、scheduleテーブルに新しいレコードを追加する
+  end note
+}
+
+package 住所 {
+  entity addresses
+}
+
+package 職員情報 {
+  entity users {
+  }
+}
+
+package 患者情報 {
+  entity patients {
+  }
+}
+
+schedules }o--|| users
+schedules ||--o{ schedule_histories
+schedules ||--o| schedule_cancels
+schedules ||--|| schedule_types
+schedules ||--|| schedule_categories
+schedules }|--o| recurring_schedules
+schedules ||--o| visit_info
+recurring_schedules ||--o{ schedules
+recurring_schedules ||--|| reccuring_types
+recurring_schedules ||--|| visit_info
+visit_info ||--|| service_codes
+visit_info ||--|| patients
+visit_info ||--|| routes
+routes ||--|{ addresses
+
+@enduml

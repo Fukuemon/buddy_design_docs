@@ -1,0 +1,52 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 患者情報 {
+  entity patients {
+    * ulid patient_id <<PK>>
+    --
+    string name
+    string service_code_id "受けているサービス内容"
+    string preferred_datetime "希望する日時"
+    int address_id <<FK>> "住所ID"
+    string preferred_gender "希望する担当者の性別"
+    string user_id <<FK>> "担当している看護師ID"
+    string recurring_schedule_id "繰り返し予定ID"
+    string area_id <<FK>> "所属エリアID"
+    int facility_id <<FK>> "施設ID"
+    date created_at
+    date updated_at
+  }
+  note bottom of patients
+  希望する日時は、午前・午後・指定なしの3つの選択肢がある
+  end note
+}
+
+package 住所 {
+  entity addresses
+}
+
+package エリア {
+  entity areas
+}
+
+package 施設情報 {
+  entity facilities
+}
+
+package 職員情報 {
+  entity users
+}
+
+package 予定 {
+  entity recurring_schedules
+  entity service_codes
+}
+
+patients ||--|| facilities
+patients ||--|| areas
+patients ||--|| addresses
+patients ||--|| service_codes
+patients ||--|| users
+patients ||--|| recurring_schedules
+@enduml

@@ -1,0 +1,47 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+package 施設情報 {
+  entity facilities {
+    * int id <<PK>>
+    --
+    string name "施設名"
+    string address_id <<FK>> "住所ID"
+  }
+  entity positions {
+    * int id <<PK>> "役職ID"
+    --
+    string name "役職名"
+    int facility_id <<FK>> "施設ID"
+  }
+
+  entity teams {
+    * int id <<PK>>
+    --
+    string name "チーム名"
+    int facility_id <<FK>> "施設ID"
+  }
+
+  note bottom of positions
+    1: マネージャー
+    2: チームリーダー
+    2: メンバー
+  end note
+
+  entity departments {
+    * int id <<PK>>
+    --
+    string name "部署名"
+    int facility_id <<FK>> "施設ID"
+  }
+
+  note bottom of departments
+    1: 看護部
+    2: リハビリ部
+  end note
+  facilities ||--|| positions
+  facilities ||--|| teams
+  facilities ||--|| departments
+}
+
+
+@enduml

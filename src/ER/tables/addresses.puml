@@ -1,0 +1,31 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 施設情報 {
+  entity facilities
+}
+
+package 住所 {
+  entity addresses {
+    * int address_id <<PK>>
+    --
+    int zip_code "郵便番号"
+    string address "住所"
+    int area_id <<FK>> "地域エリアID"
+  }
+}
+
+package エリア {
+  entity areas {
+    * int id <<PK>>
+    --
+    string area_code "地域エリア名"
+    string facility_id <<FK>> "施設ID"
+  }
+}
+
+addresses }o--|| areas
+areas }o--|| facilities
+
+
+@enduml
