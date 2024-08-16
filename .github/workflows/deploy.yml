@@ -14,8 +14,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz openjdk-11-jdk  # Graphviz と Java のインストール
-          cargo install mdbook mdbook-plantuml  # mdBook と PlantUML プラグインのインストール
+          sudo apt-get install -y graphviz openjdk-11-jdk
+          cargo install mdbook mdbook-plantuml
 
       - name: Build the book
         run: mdbook build
@@ -23,6 +23,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./book
           publish_branch: gh-pages
