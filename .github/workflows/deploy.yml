@@ -11,8 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install mdBook
-        run: cargo install mdbook
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz openjdk-11-jdk  # Graphviz と Java のインストール
+          cargo install mdbook mdbook-plantuml  # mdBook と PlantUML プラグインのインストール
 
       - name: Build the book
         run: mdbook build
