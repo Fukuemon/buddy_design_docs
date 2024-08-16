@@ -1,0 +1,10 @@
+[book]
+authors = ["Fukuemon"]
+language = "en"
+multilingual = false
+src = "src"
+title = "buddy_design_docs"
+destination = "book"
+
+[preprocessor.plantuml]
+plantuml_cmd = "plantuml"
