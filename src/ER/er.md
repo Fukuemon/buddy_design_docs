@@ -3,7 +3,7 @@
 ## 全体図
 
 ```plantuml
-!include ER/er.puml
+!include ./er.puml
 ```
 
 ## tables
@@ -11,41 +11,41 @@
 ### users
 
 ```plantuml
-!include ER/tables/users.puml
+!include ./tables/users.puml
 ```
 
 ### policies
 
 ```plantuml
-!include ER/tables/policies.puml
+!include ./tables/policies.puml
 ```
 
 ### patients
 
 ```plantuml
-!include ER/tables/patients.puml
+!include ./tables/patients.puml
 ```
 
 ### schedules
 
 ```plantuml
-!include ER/tables/schedules.puml
+!include ./tables/schedules.puml
 ```
 
 ### addresses
 
 ```plantuml
-!include ER/tables/addresses.puml
+!include ./tables/addresses.puml
 ```
 
 ### facilities
 
 ```plantuml
-!include ER/tables/facilities.puml
+!include ./tables/facilities.puml
 ```
 
 ### labor_managements
 
 ```plantuml
-!include ER/tables/labor_managements.puml
+!include ./tables/labor_managements.puml
 ```
