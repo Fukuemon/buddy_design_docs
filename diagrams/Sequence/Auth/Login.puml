@@ -8,7 +8,7 @@ Participant Cognito
 Front --> Back: Post: /login -body: {username, password, facility_code}
 Back --> Cognito: ユーザー情報検証
 Cognito --> Back: トークン返却
-Cognito --> Front: トークン返却・Cookieに保存
+Back --> Front: トークン返却・Cookieに保存
 
 @enduml
 ```

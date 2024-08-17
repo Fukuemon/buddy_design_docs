@@ -9,8 +9,8 @@ database DB
 ユーザー --> Front: ユーザー情報入力
 Front --> Back: Post：buddy.api.com/auth/signup
 Back --> Cognito: ユーザープールにユーザー情報を登録
-Cognito --> Back
-Back --> DB: "ユーザー情報"を保存
+Cognito --> Back: SignUpOutput（Sub[UUiD]）
+Back --> DB: "Subを主キーとして、ユーザー情報"を保存
 DB --> Back
 Back --> Front: Response"200":{"message": ok}
 @enduml

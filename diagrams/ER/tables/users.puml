@@ -5,9 +5,12 @@ entity auth_users {
   * string username "ユーザー名"
   --
   string phone_number "電話番号"
-  string password "パスワード"
-  binaly facility_id <<FK>> "施設ID"
-  binaly sub "一意のユーザーを特定するためのuuid"
+  ENUM('男性', '女性') gender "性別"
+  binary area_id <<FK>> "担当エリアID"
+  binary position_id <<FK>> "役職ID"
+  binary team_id <<FK>> "チームID"
+  date created_at
+  date updated_at
 }
 
 note bottom of auth_users
@@ -26,7 +29,6 @@ package 職員情報 {
     binary area_id <<FK>> "担当エリアID"
     binary position_id <<FK>> "役職ID"
     binary team_id <<FK>> "チームID"
-    binary working_hours_id "月稼働時間ID"
     date created_at
     date updated_at
   }
