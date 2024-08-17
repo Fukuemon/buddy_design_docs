@@ -1,11 +1,10 @@
 @startuml entity-relationship-diagram
 skinparam linetype ortho
+!include ./tables/users.puml
 !include ./tables/schedules.puml
 !include ./tables/addresses.puml
 !include ./tables/labor_managements.puml
-!include ./tables/users.puml
 !include ./tables/patients.puml
 !include ./tables/facilities.puml
 !include ./tables/policies.puml
-
 @enduml

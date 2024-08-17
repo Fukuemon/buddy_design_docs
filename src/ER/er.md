@@ -1,51 +1,13 @@
-# ER 図
+> **全体**
 
-## 全体図
+<img src="../diagrams-svg/ER/er.svg" width="1200px">
 
-```plantuml
-!include src/ER/er.puml
-```
+> **テーブル詳細**
 
-## tables
-
-### users
-
-```plantuml
-!include ./tables/users.puml
-```
-
-### policies
-
-```plantuml
-!include ./tables/policies.puml
-```
-
-### patients
-
-```plantuml
-!include ./tables/patients.puml
-```
-
-### schedules
-
-```plantuml
-!include ./tables/schedules.puml
-```
-
-### addresses
-
-```plantuml
-!include ./tables/addresses.puml
-```
-
-### facilities
-
-```plantuml
-!include ./tables/facilities.puml
-```
-
-### labor_managements
-
-```plantuml
-!include ./tables/labor_managements.puml
-```
+- [スタッフ](./tables/users.md)
+- [予定](./tables/schedules.md)
+- [患者](./tables/patients.md)
+- [権限](./tables/policies.md)
+- [施設](./tables/facilities.md)
+- [住所・エリア](./tables/addresses.md)
+- [経営情報](./tables/labor_managements.md)

@@ -1,0 +1,28 @@
+@startuml Auth
+Actor ユーザー
+Participant Frontend as Front
+Participant APIGateway as Gateway
+Participant Cognito
+Participant Backend as Back
+Participant DB
+ユーザー --> Front: Action
+Front --> Gateway: Get: /hoge
+Gateway --> Cognito: Token情報を検証
+note right
+トークンの検証を行う
+成功時、Backendのエンドポイントへのアクセスを許可する
+end note
+Cognito --> Gateway
+Gateway --> Back: リクエスト
+Back --> DB: ユーザー情報取得
+DB --> Back
+Back --> Back: ユーザーの権限情報を確認
+note right
+バックエンドでは、リクエストから権限情報を確認する
+成功時、処理を実行し、レスポンスを返す
+end note
+Back --> DB: リソース取得
+DB --> Back
+Back --> Gateway: Response"200":{"message": ok}
+Gateway --> Front: Response"200":{"message": ok}
+@enduml
