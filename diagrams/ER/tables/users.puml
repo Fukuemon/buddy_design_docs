@@ -1,6 +1,5 @@
 @startuml entity-relationship-diagram
 skinparam linetype ortho
-!include facilities.puml
 
 entity auth_users {
   * string username "ユーザー名"
