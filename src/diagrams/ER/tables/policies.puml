@@ -29,6 +29,17 @@ package 権限 {
     ユーザーが持っている権限
     認可にはこの情報を参照する
   end note
+
+  entity user_policy_targets {
+    * binary id <<PK>>
+    --
+    binary user_policy_id <<FK>> "ユーザーポリシーID"
+    binary target_user_id <<FK>> "ターゲットユーザーID"
+  }
+  note bottom of user_policy_targets
+    特定のユーザーポリシーに関連するターゲットユーザーの管理
+    例: カレンダーの閲覧対象ユーザー
+  end note
 }
 
 package 職員情報 {
@@ -43,5 +54,6 @@ policies ||--o{ position_policies
 policies ||--o{ user_policies
 users ||--o{ user_policies
 positions ||--o{ position_policies
+user_policies ||--o{ user_policy_targets
+users ||--o{ user_policy_targets
 @enduml
-
