@@ -62,7 +62,7 @@ package 予定 {
     --
     binary schedule_id <<FK>> "キャンセルされた予定ID"
     string cancel_reason "キャンセル理由"
-    date cancel_date "キャンセル日時"
+    datetime cancel_date "キャンセル日時"
   }
 
   entity schedule_histories {
@@ -120,13 +120,12 @@ package 予定 {
     binary recurring_rule_id <<PK>>
     --
     binary schedule_id: スケジュールID <<FK>>
-    int frequency: "繰り返し頻度"
-    int interval: "繰り返し間隔"
+    int frequency: "繰り返し頻度（monthly, weekly)"
     int day_of_week: "曜日"
     int day_of_month: "月の日"
     int week_of_month: "月の週"
-    int start_date: "開始日"
-    int end_date: "終了日"
+    datetime start_date: "開始日"
+    datetime end_date: "終了日"
   }
   note top of reccuring_types
   繰り返し予定のルールを定義する
@@ -139,10 +138,10 @@ package 予定 {
     binary schedule_type_id: "予定タイプID"
     binary visit_info_id: "訪問情報ID"
     binary schedule_category_id: "予定カテゴリID"
-    title: "タイトル"
-    description: "説明"
-    start_time: "開始時間"
-    end_time: "終了時間"
+    string title: "タイトル"
+    string description: "説明"
+    datetime start_time: "開始時間"
+    datetime end_time: "終了時間"
   }
   note top of recurring_schedules
     繰り返し予定の情報を保存する
