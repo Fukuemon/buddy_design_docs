@@ -8,12 +8,12 @@ package 患者情報 {
     string name
     string service_code_id "受けているサービス内容"
     string preferred_datetime "希望する日時"
-    int address_id <<FK>> "住所ID"
+    binary address_id <<FK>> "住所ID"
     string preferred_gender "希望する担当者の性別"
     string user_id <<FK>> "担当している看護師ID"
     string recurring_schedule_id "繰り返し予定ID"
-    string area_id <<FK>> "所属エリアID"
-    int facility_id <<FK>> "施設ID"
+    binary area_id <<FK>> "所属エリアID"
+    binary facility_id <<FK>> "施設ID"
     date created_at
     date updated_at
   }
