@@ -2,18 +2,25 @@
 Actor ユーザー
 Participant Frontend as Front
 Participant APIGateway as Gateway
+Participant Lambda
 Participant Cognito
+Database Redis
 Participant Backend as Back
 Participant DB
+
 ユーザー --> Front: Action
-Front --> Gateway: Get: /hoge
-Gateway --> Cognito: Token情報を検証
+Front --> Gateway: Get: /users -header: {sessionId: SessionID}
+Gateway --> Lambda: Lambda Authorizer
+Lambda --> Redis: SessionIDを元にaccessToken取得
+Redis --> Lambda: accessToken
+Lambda --> Cognito: Token検証
 note right
 トークンの検証を行う
 成功時、Backendのエンドポイントへのアクセスを許可する
 end note
-Cognito --> Gateway
-Gateway --> Back: リクエスト
+Cognito --> Lambda: トークン検証結果
+Lambda --> Gateway: トークン検証結果返却
+Gateway --> Back: （成功時）Get: /users
 Back --> DB: ユーザー情報取得
 DB --> Back
 Back --> Back: ユーザーの権限情報を確認
