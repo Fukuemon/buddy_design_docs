@@ -1,17 +1,29 @@
 @startuml Login
 Actor ユーザー
 Participant Frontend as Front
+Participant APIGateway as Gateway
 Participant Backend as Back
 Participant Cognito
 Database Redis
 
-ユーザー --> Front: ユーザー情報入力
-Front --> Back: Post: /auth/login -body: {username, password, facility_code}
-Back --> Cognito: ユーザー情報検証
-Cognito --> Back: トークン返却
-Back --> Redis: SessionID・トークン保存
-Back --> Front: SessionId返却
-Front --> Front: CookieにSessionIDを保存
+activate ユーザー
+ユーザー -> Front: ユーザー情報入力
+activate Front
+Front -> Gateway: Post：buddy.api.com/auth/login
+note left of Gateway:  -body: {username, password, facility_code}
+Gateway -> Back: Post: /auth/login
+Back -> Cognito: ユーザー情報検証
+alt ログイン成功
+  Cognito --> Back: トークン返却
+  Back --> Redis: SessionID・トークン保存
+  Back --> Front: SessionId返却
+  Front --> Front: CookieにSessionIDを保存
+  Front --> ユーザー: /calendarへリダイレクト
+else ロウイン失敗
+  Front --> ユーザー: エラーメッセージを表示
+end
+
+deactivate ユーザー
 
 
 @enduml

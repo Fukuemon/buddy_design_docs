@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="557px" preserveAspectRatio="none" style="width:1159px;height:557px;" version="1.1" viewBox="0 0 1159 557" width="1159px" zoomAndPan="magnify"><defs><filter height="300%" id="f1k4beri42w3ok" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[d43a93bed96446588d3c5fef43396a6d]
+cluster 訪問情報--><polygon fill="#FFFFFF" filter="url(#f1k4beri42w3ok)" points="22,24,84,24,91,46.2969,997,46.2969,997,545,22,545,22,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="91" y1="46.2969" y2="46.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="26" y="38.9951">訪問情報</text><!--MD5=[17926c9f6f73500917f0231ee648f0f2]
+cluster 患者情報--><polygon fill="#FFFFFF" filter="url(#f1k4beri42w3ok)" points="1021,259.5,1083,259.5,1090,281.7969,1137,281.7969,1137,358.5,1021,358.5,1021,259.5" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1021" x2="1090" y1="281.7969" y2="281.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="1025" y="274.4951">患者情報</text><!--MD5=[8d41beee1a3a43cb45bc7f02531b65aa]
+class visit_infos--><rect fill="#FEFECE" filter="url(#f1k4beri42w3ok)" height="150.4375" id="visit_infos" style="stroke: #A80036; stroke-width: 1.5;" width="310" x="487" y="59"/><ellipse cx="607.75" cy="75" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M611.8594,81 L604.1406,81 L604.1406,68.6094 L611.8594,68.6094 L611.8594,70.7656 L606.5938,70.7656 L606.5938,73.4375 L611.3594,73.4375 L611.3594,75.5938 L606.5938,75.5938 L606.5938,78.8438 L611.8594,78.8438 L611.8594,81 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="628.25" y="79.1543">visit_infos</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="488" x2="796" y1="91" y2="91"/><ellipse cx="498" cy="102" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="507" y="105.2104">binary visit_info_id «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="488" x2="796" y1="111.8047" y2="111.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="172" x="493" y="126.0151">binary patient_id «FK» "患者ID"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="288" x="493" y="138.8198">binary assigned_user_id «FK» "担当者ID（UserID）"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="298" x="493" y="151.6245">binary companion_user_id «FK» "同行者ID（UserID）"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="272" x="493" y="164.4292">binary schedule_category_id «FK» "訪問カテゴリ"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="174" x="493" y="177.2339">binary route_id «FK» "ルートID"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="262" x="493" y="190.0386">binary service_code_id «FK» "サービスコードID"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="148" x="493" y="202.8433">int service_time "提供時間"</text><!--MD5=[974c6912de8d83cf8a8aca8903c83a0e]
+class service_codes--><rect fill="#FEFECE" filter="url(#f1k4beri42w3ok)" height="86.4141" id="service_codes" style="stroke: #A80036; stroke-width: 1.5;" width="167" x="132.5" y="275.5"/><ellipse cx="168.65" cy="291.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M172.7594,297.5 L165.0406,297.5 L165.0406,285.1094 L172.7594,285.1094 L172.7594,287.2656 L167.4938,287.2656 L167.4938,289.9375 L172.2594,289.9375 L172.2594,292.0938 L167.4938,292.0938 L167.4938,295.3438 L172.7594,295.3438 L172.7594,297.5 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="187.35" y="295.6543">service_codes</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="133.5" x2="298.5" y1="307.5" y2="307.5"/><ellipse cx="143.5" cy="318.5" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="152.5" y="321.7104">binary id «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="133.5" x2="298.5" y1="328.3047" y2="328.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="138.5" y="342.5151">string code "サービスコード"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="148" x="138.5" y="355.3198">int service_time "提供時間"</text><path d="M38.5,447 L38.5,510.3984 A0,0 0 0 0 38.5,510.3984 L293.5,510.3984 A0,0 0 0 0 293.5,510.3984 L293.5,457 L283.5,447 L217,447 L213,361.8 L209,447 L38.5,447 A0,0 0 0 0 38.5,447 " fill="#FBFB77" filter="url(#f1k4beri42w3ok)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M283.5,447 L283.5,457 L293.5,457 L283.5,447 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="234" x="44.5" y="464.0669">コードIDに応じてサービスコードを設定</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="53" x="44.5" y="479.1997">1. 訪看I2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="53" x="44.5" y="494.3325">2. 訪看I3</text><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,2.0;" x1="39.5" x2="292.5" y1="497.3984" y2="497.3984"/><!--MD5=[8aadc6119ebe9278695a1ee92697b8ea]
+class visit_categories--><rect fill="#FEFECE" filter="url(#f1k4beri42w3ok)" height="73.6094" id="visit_categories" style="stroke: #A80036; stroke-width: 1.5;" width="172" x="409" y="281.5"/><ellipse cx="443.35" cy="297.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M447.4594,303.5 L439.7406,303.5 L439.7406,291.1094 L447.4594,291.1094 L447.4594,293.2656 L442.1938,293.2656 L442.1938,295.9375 L446.9594,295.9375 L446.9594,298.0938 L442.1938,298.0938 L442.1938,301.3438 L447.4594,301.3438 L447.4594,303.5 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="97" x="461.65" y="301.6543">visit_categories</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="410" x2="580" y1="313.5" y2="313.5"/><ellipse cx="420" cy="324.5" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="429" y="327.7104">binary id «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="410" x2="580" y1="334.3047" y2="334.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="415" y="348.5151">string name "予定のカテゴリ"</text><path d="M328.5,428 L328.5,528.7969 A0,0 0 0 0 328.5,528.7969 L613.5,528.7969 A0,0 0 0 0 613.5,528.7969 L613.5,438 L603.5,428 L499,428 L495,355.61 L491,428 L328.5,428 A0,0 0 0 0 328.5,428 " fill="#FBFB77" filter="url(#f1k4beri42w3ok)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M603.5,428 L603.5,438 L613.5,438 L603.5,428 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="234" x="334.5" y="445.0669">緊急訪問件数・入院件数をカウントする</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="264" x="334.5" y="460.1997">複数選択するかどうかで、多:多の関係になる</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="342.5" y="475.3325">1:夜勤</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="342.5" y="490.4653">2:緊急</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="342.5" y="505.5981">3:入院</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="12" x="342.5" y="520.731">...</text><!--MD5=[4e5e1fd7835748d2130dd04f1359b45f]
+class routes--><rect fill="#FEFECE" filter="url(#f1k4beri42w3ok)" height="99.2188" id="routes" style="stroke: #A80036; stroke-width: 1.5;" width="252" x="664" y="269"/><ellipse cx="765.25" cy="285" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M769.3594,291 L761.6406,291 L761.6406,278.6094 L769.3594,278.6094 L769.3594,280.7656 L764.0938,280.7656 L764.0938,283.4375 L768.8594,283.4375 L768.8594,285.5938 L764.0938,285.5938 L764.0938,288.8438 L769.3594,288.8438 L769.3594,291 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="41" x="785.75" y="289.1543">routes</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="665" x2="915" y1="301" y2="301"/><ellipse cx="675" cy="312" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="684" y="315.2104">binary id «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="665" x2="915" y1="321.8047" y2="321.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="670" y="336.0151">int travel_time "移動時間"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="224" x="670" y="348.8198">binary address_id «FK» "出発地の住所ID"</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="240" x="670" y="361.6245">binary destination_id «FK» "目的地の住所ID"</text><path d="M649,462 L649,495.1328 A0,0 0 0 0 649,495.1328 L981,495.1328 A0,0 0 0 0 981,495.1328 L981,472 L971,462 L794,462 L790,368.25 L786,462 L649,462 A0,0 0 0 0 649,462 " fill="#FBFB77" filter="url(#f1k4beri42w3ok)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M971,462 L971,472 L981,472 L971,462 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="311" x="655" y="479.0669">出発地と目的地は、addressテーブルに対応させる？</text><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,2.0;" x1="650" x2="980" y1="482.1328" y2="482.1328"/><!--MD5=[5f57dc4600bb33255e6857fe60f92832]
+class patients--><rect fill="#FEFECE" filter="url(#f1k4beri42w3ok)" height="48" id="patients" style="stroke: #A80036; stroke-width: 1.5;" width="84" x="1037" y="294.5"/><ellipse cx="1052" cy="310.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M1056.1094,316.5 L1048.3906,316.5 L1048.3906,304.1094 L1056.1094,304.1094 L1056.1094,306.2656 L1050.8438,306.2656 L1050.8438,308.9375 L1055.6094,308.9375 L1055.6094,311.0938 L1050.8438,311.0938 L1050.8438,314.3438 L1056.1094,314.3438 L1056.1094,316.5 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="52" x="1066" y="314.6543">patients</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="1038" x2="1120" y1="326.5" y2="326.5"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="1038" x2="1120" y1="334.5" y2="334.5"/><!--MD5=[53b8d5c155bb77d592ab98df4467b58b]
+link visit_infos to service_codes--><path d="M480,134 C480,134 216,134 216,134 C216,134 216,268.24 216,268.24 " fill="none" id="visit_infos-service_codes" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="220" x2="212" y1="271.24" y2="271.24"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="220" x2="212" y1="268.24" y2="268.24"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="216" x2="216" y1="267.24" y2="275.24"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="483" x2="483" y1="130" y2="138"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="480" x2="480" y1="130" y2="138"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="479" x2="487" y1="134" y2="134"/><!--MD5=[1e54e2c799655c2a2b6ce00a54fef805]
+link visit_infos to patients--><path d="M804.3,134 C804.3,134 1079,134 1079,134 C1079,134 1079,287.38 1079,287.38 " fill="none" id="visit_infos-patients" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1083" x2="1075" y1="290.38" y2="290.38"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1083" x2="1075" y1="287.38" y2="287.38"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1079" x2="1079" y1="286.38" y2="294.38"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="801.3" x2="801.3" y1="138" y2="130"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="804.3" x2="804.3" y1="138" y2="130"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="805.3" x2="797.3" y1="134" y2="134"/><!--MD5=[00c9d5881ccfb62228fb4fbc007c8088]
+link visit_infos to routes--><path d="M730.5,216.04 C730.5,216.04 730.5,261.88 730.5,261.88 " fill="none" id="visit_infos-routes" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="734.5" x2="726.5" y1="264.88" y2="264.88"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="734.5" x2="726.5" y1="261.88" y2="261.88"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="730.5" x2="730.5" y1="260.88" y2="268.88"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="726.5" x2="734.5" y1="213.04" y2="213.04"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="726.5" x2="734.5" y1="216.04" y2="216.04"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="730.5" x2="730.5" y1="217.04" y2="209.04"/><!--MD5=[564161c1a93edaa5f7e96e5d8dfb7e9d]
+link visit_infos to visit_categories--><path d="M534,217.04 C534,217.04 534,273.44 534,273.44 " fill="none" id="visit_infos-visit_categories" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="540" y1="273.44" y2="281.44"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="528" y1="273.44" y2="281.44"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="534" y1="273.44" y2="281.44"/><ellipse cx="534" cy="267.44" fill="none" rx="4" ry="4" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="528" y1="217.04" y2="209.04"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="540" y1="217.04" y2="209.04"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="534" x2="534" y1="217.04" y2="209.04"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="530" x2="538" y1="219.04" y2="219.04"/><!--MD5=[5bd1dc4782258d14911a3abbb8d4fdc1]
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 訪問情報 {
+  entity visit_infos {
+    * binary visit_info_id <<PK>>
+    - -
+    binary patient_id <<FK>> "患者ID"
+    binary assigned_user_id <<FK>> "担当者ID（UserID）"
+    binary companion_user_id <<FK>> "同行者ID（UserID）"
+    binary schedule_category_id <<FK>> "訪問カテゴリ"
+    binary route_id <<FK>> "ルートID"
+    binary service_code_id <<FK>> "サービスコードID"
+    int service_time "提供時間"
+  }
+
+  entity service_codes {
+    * binary id <<PK>>
+    - -
+    string code "サービスコード"
+    int service_time "提供時間"
+  }
+  note bottom of service_codes
+    コードIDに応じてサービスコードを設定
+    1. 訪看I2
+    2. 訪看I3
+    ...
+  end note
+
+  entity visit_categories {
+    * binary id <<PK>>
+    - -
+    string name "予定のカテゴリ"
+  }
+
+  note bottom of visit_categories
+  緊急訪問件数・入院件数をカウントする
+  複数選択するかどうかで、多:多の関係になる
+    1:夜勤
+    2:緊急
+    3:入院
+    ...
+  end note
+
+  entity routes {
+    * binary id <<PK>>
+    - -
+    int travel_time "移動時間"
+    binary address_id <<FK>> "出発地の住所ID"
+    binary destination_id <<FK>> "目的地の住所ID"
+  }
+
+  note bottom of routes
+    出発地と目的地は、addressテーブルに対応させる？
+    ...
+  end note
+}
+
+package 患者情報 {
+  entity patients {}
+}
+
+visit_infos ||- -|| service_codes
+visit_infos ||- -|| patients
+visit_infos ||- -|| routes
+visit_infos }|- -o{ visit_categories
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 10:22:07 UTC 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.16+8
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

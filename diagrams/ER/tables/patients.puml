@@ -14,8 +14,6 @@ package 患者情報 {
     string recurring_schedule_id "繰り返し予定ID"
     binary area_id <<FK>> "所属エリアID"
     binary facility_id <<FK>> "施設ID"
-    date created_at
-    date updated_at
   }
   note bottom of patients
   希望する日時は、午前・午後・指定なしの3つの選択肢がある
@@ -40,6 +38,9 @@ package 職員情報 {
 
 package 予定 {
   entity recurring_schedules
+}
+
+package 訪問情報 {
   entity service_codes
 }
 

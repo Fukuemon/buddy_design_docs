@@ -1,16 +1,27 @@
 @startuml SignUp
 Actor ユーザー
 Participant Frontend as Front
+Participant APIGateway as Gateway
 Participant Backend as Back
 Participant Cognito
 database DB
 
-
-ユーザー --> Front: ユーザー情報入力
-Front --> Back: Post：buddy.api.com/auth/signup
-Back --> Cognito: ユーザープールにユーザー情報を登録
+activate ユーザー
+ユーザー -> Front: ユーザー情報入力
+activate Front
+Front -> Gateway: Post：buddy.api.com/auth/signup
+Gateway -> Back: Post：buddy.api.com/auth/signup
+Back -> Cognito: ユーザープールにユーザー情報を登録
 Cognito --> Back: SignUpOutput（Sub[UUiD]）
-Back --> DB: "Subを主キーとして、ユーザー情報"を保存
+Back -> DB: "subを主キーとして、ユーザー情報"を保存
 DB --> Back
-Back --> Front: Response"200":{"message": ok}
+Back --> Gateway: Response"200":{"message": ok}
+Gateway --> Front: Response"200":{"message": ok}
+deactivate Front
+alt ユーザー登録成功
+  Front --> ユーザー: /calendarへリダイレクト
+else ユーザー登録失敗
+  Front --> ユーザー: エラーメッセージを表示
+end
+deactivate ユーザー
 @enduml

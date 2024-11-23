@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -30,15 +30,17 @@
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -60,19 +62,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -82,45 +81,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="ER/er.html" class="active"><strong aria-hidden="true">1.</strong> ER 図</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ER/tables/users.html"><strong aria-hidden="true">1.1.</strong> スタッフ</a></li><li class="chapter-item expanded "><a href="ER/tables/schedules.html"><strong aria-hidden="true">1.2.</strong> 予定</a></li><li class="chapter-item expanded "><a href="ER/tables/patients.html"><strong aria-hidden="true">1.3.</strong> 患者</a></li><li class="chapter-item expanded "><a href="ER/tables/policies.html"><strong aria-hidden="true">1.4.</strong> 権限</a></li><li class="chapter-item expanded "><a href="ER/tables/facilities.html"><strong aria-hidden="true">1.5.</strong> 施設</a></li><li class="chapter-item expanded "><a href="ER/tables/addresses.html"><strong aria-hidden="true">1.6.</strong> 住所・エリア</a></li><li class="chapter-item expanded "><a href="ER/tables/labor_managements.html"><strong aria-hidden="true">1.7.</strong> 経営情報</a></li></ol></li><li class="chapter-item expanded "><a href="インフラ構成/インフラ構成.html"><strong aria-hidden="true">2.</strong> インフラ構成</a></li><li class="chapter-item expanded "><a href="機能詳細/Summary.html"><strong aria-hidden="true">3.</strong> 機能一覧</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="機能詳細/認証認可・ユーザー管理/Summary.html"><strong aria-hidden="true">3.1.</strong> 認証認可・ユーザー管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="機能詳細/認証認可・ユーザー管理/認証認可.html"><strong aria-hidden="true">3.1.1.</strong> 認証認可</a></li><li class="chapter-item expanded "><a href="機能詳細/認証認可・ユーザー管理/新規ユーザー登録.html"><strong aria-hidden="true">3.1.2.</strong> 新期ユーザー登録</a></li><li class="chapter-item expanded "><a href="機能詳細/認証認可・ユーザー管理/権限.html"><strong aria-hidden="true">3.1.3.</strong> 権限制御</a></li><li class="chapter-item expanded "><a href="機能詳細/認証認可・ユーザー管理/ユーザー管理.html"><strong aria-hidden="true">3.1.4.</strong> ユーザー管理</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> 施設</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="機能詳細/施設/施設情報.html"><strong aria-hidden="true">3.2.1.</strong> 施設情報</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> 経営数値</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="機能詳細/経営数値/管理する経営数値.html"><strong aria-hidden="true">3.3.1.</strong> 管理する経営数値</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="画面構成/画面一覧.html"><strong aria-hidden="true">4.</strong> 画面構成（一覧）</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="画面構成/予定/カレンダー.html"><strong aria-hidden="true">4.1.</strong> カレンダー</a></li><li class="chapter-item expanded "><a href="画面構成/予定/予定詳細.html"><strong aria-hidden="true">4.2.</strong> 予定詳細</a></li><li class="chapter-item expanded "><a href="画面構成/患者/患者一覧.html"><strong aria-hidden="true">4.3.</strong> 患者一覧</a></li></ol></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -188,6 +167,7 @@
 <li><a href="./tables/facilities.html">施設</a></li>
 <li><a href="./tables/addresses.html">住所・エリア</a></li>
 <li><a href="./tables/labor_managements.html">経営情報</a></li>
+<li><a href="./tables/visit_infos.html">訪問情報</a></li>
 </ul>
 
                     </main>

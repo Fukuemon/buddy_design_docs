@@ -9,8 +9,6 @@ entity auth_users {
   binary area_id <<FK>> "担当エリアID"
   binary position_id <<FK>> "役職ID"
   binary team_id <<FK>> "チームID"
-  date created_at
-  date updated_at
 }
 
 note bottom of auth_users
@@ -20,7 +18,7 @@ end note
 
 package 職員情報 {
   entity users {
-    * binaly id <<PK>>
+    * binary id <<PK>>
     --
     binary auth_user_id <<FK>> "CognitoユーザーID"
     string username "ユーザー名"
@@ -29,8 +27,6 @@ package 職員情報 {
     binary area_id <<FK>> "担当エリアID"
     binary position_id <<FK>> "役職ID"
     binary team_id <<FK>> "チームID"
-    date created_at
-    date updated_at
   }
 
   note bottom of users

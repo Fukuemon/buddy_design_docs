@@ -6,28 +6,25 @@ package 予定 {
     * binary schedule_id <<PK>>
     --
     binary user_id "ユーザーID"
-    string title "予定のタイトル"
+    string title "予定のタイトル（NULL_OK)"
     binary schedule_type_id <<FK>> "予定の種類"
-    binary schedule_category_id <<FK>> "予定のカテゴリ"
     binary recurring_schedule_id <<FK>>"繰り返し予定ID（NULL_OK)"
-    binary visit_info_id <<FK>> "訪問情報ID"
-    string description "予定の説明"
-    datetime startDate "開始時間"
-    datetime endDate "終了時間"
-    boolean is_cancelled"キャンセルされたかどうか"
-    boolean is_overtime_work "時間外勤務か"
-    boolean is_modified "変更されたかどうか"
-    date created_at
-    date updated_at
+    binary visit_info_id <<FK>> "訪問情報ID(NULL_OK)"
+    string description "予定の説明(NULL_OK)"
+    datetime visit_date "予定日（YYYY-MM-DD）"
+    datetime start_time "開始時間（HH:MM）"
+    datetime end_time "終了時間（HH:MM）"
+    boolean is_cancelled"キャンセルされたかどうか(default=false)"
+    boolean is_overtime_work "時間外勤務か(default=false)"
+    datetime before_change_date "変更前の訪問日（YYYY-MM-DD"
+    datetime before_change_start_time "変更前の開始時間（HH:MM）"
   }
 
   note bottom of schedules
     繰り返し予定で特定の予定のみ変更された場合、
     このテーブルに新しいレコードを追加する
-    予定を入れれるか判断する際に、繰り返し予定IDを参照し、
-
+    その際に、繰り返し予定のIDと変更前の日時を保存する
   end note
-
 
   entity schedule_types {
     * binary schedule_type_id <<PK>>
@@ -37,24 +34,7 @@ package 予定 {
 
   note bottom of schedule_types
     1: 通常業務
-    2: 通常業務繰り返し
     3: 訪問
-    4: 繰り返し訪問
-  end note
-
-  entity schedule_categories {
-    * binary id <<PK>>
-    --
-    string name "予定のカテゴリ"
-  }
-
-  note bottom of schedule_categories
-  緊急訪問件数・入院件数をカウントする
-  複数選択するかどうかで、多:多の関係になる
-    1:通常
-    2:緊急
-    3:入院
-    ...
   end note
 
   entity schedule_cancels {
@@ -65,58 +45,7 @@ package 予定 {
     datetime cancel_date "キャンセル日時"
   }
 
-  entity schedule_histories {
-    * binary id <<PK>>
-    --
-    binary schedule_id <<FK>>
-    string changed_field "変更されたフィールド"
-    string old_value "変更前の値"
-    string new_value "変更後の値"
-    datetime change_date "変更日時"
-    string change_reason "変更理由"
-  }
-  note top of schedule_histories
-    一つの予定に対して複数の更新履歴がある
-    1つの変更には一つの値しか変更されない
-  end note
-
-  entity visit_info {
-    * binary visit_info_id <<PK>>
-    --
-    binary patient_id <<FK>> "患者ID"
-    binary route_id <<FK>> "ルートID"
-    binary service_code_id <<FK>> "サービスコードID"
-    int service_time "提供時間"
-  }
-
-  entity service_codes {
-    * binary id <<PK>>
-    --
-    string code "サービスコード"
-    int service_time "提供時間"
-  }
-  note bottom of service_codes
-    コードIDに応じてサービスコードを設定
-    1. 訪看I2
-    2. 訪看I3
-    ...
-  end note
-
-
-  entity routes {
-    * binary id <<PK>>
-    --
-    int travel_time "移動時間"
-    binary address_id <<FK>> "出発地の住所ID"
-    binary destination_id <<FK>> "目的地の住所ID"
-  }
-
-  note bottom of routes
-    出発地と目的地は、addressテーブルに対応させる？
-    ...
-  end note
-
-  entity reccuring_types {
+  entity recurring_rules {
     binary recurring_rule_id <<PK>>
     --
     binary schedule_id: スケジュールID <<FK>>
@@ -127,7 +56,7 @@ package 予定 {
     datetime start_date: "開始日"
     datetime end_date: "終了日"
   }
-  note top of reccuring_types
+  note top of recurring_rules
   繰り返し予定のルールを定義する
   end note
 
@@ -140,12 +69,13 @@ package 予定 {
     binary schedule_category_id: "予定カテゴリID"
     string title: "タイトル"
     string description: "説明"
+    datetime visit_date: "訪問日"
     datetime start_time: "開始時間"
     datetime end_time: "終了時間"
   }
   note top of recurring_schedules
     繰り返し予定の情報を保存する
-    繰り返しタイプに基づいて、scheduleテーブルに新しいレコードを追加する
+    繰り返しタイプに基づいて、フロント側で予定を複製する
   end note
 }
 
@@ -163,19 +93,26 @@ package 患者情報 {
   }
 }
 
+package 訪問情報 {
+  entity visit_infos {
+  }
+  entity service_codes {
+  }
+  entity routes {
+  }
+}
+
 schedules }o--|| users
-schedules ||--o{ schedule_histories
 schedules ||--o| schedule_cancels
-schedules ||--|| schedule_types
-schedules ||--|| schedule_categories
+schedules ||--|| schedule_rules
 schedules }|--o| recurring_schedules
-schedules ||--o| visit_info
+schedules ||--o| visit_infos
 recurring_schedules ||--o{ schedules
-recurring_schedules ||--|| reccuring_types
-recurring_schedules ||--|| visit_info
-visit_info ||--|| service_codes
-visit_info ||--|| patients
-visit_info ||--|| routes
+recurring_schedules ||--|| recurring_rules
+recurring_schedules ||--|| visit_infos
+visit_infos ||--|| service_codes
+visit_infos ||--|| patients
+visit_infos ||--|| routes
 routes ||--|{ addresses
 
 @enduml
