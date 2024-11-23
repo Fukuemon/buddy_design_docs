@@ -4,6 +4,7 @@
 
   - [スタッフ](./ER/tables/users.md)
   - [予定](./ER/tables/schedules.md)
+  - [訪問情報](./ER/tables/visit_infos.md)
   - [患者](./ER/tables/patients.md)
   - [権限](./ER/tables/policies.md)
   - [施設](./ER/tables/facilities.md)
