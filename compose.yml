@@ -1,0 +1,9 @@
+services:
+  plantuml-converter:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./src/diagrams:/app/src/diagrams
+      - ./src/diagrams-svg:/app/src/diagrams-svg
+    command: ["/app/convert_puml.sh"]
