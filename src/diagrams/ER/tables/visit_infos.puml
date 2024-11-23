@@ -1,0 +1,68 @@
+@startuml entity-relationship-diagram
+skinparam linetype ortho
+
+package 訪問情報 {
+  entity visit_infos {
+    * binary visit_info_id <<PK>>
+    --
+    binary patient_id <<FK>> "患者ID"
+    binary assigned_user_id <<FK>> "担当者ID（UserID）"
+    binary companion_user_id <<FK>> "同行者ID（UserID）"
+    binary schedule_category_id <<FK>> "訪問カテゴリ"
+    binary route_id <<FK>> "ルートID"
+    binary service_code_id <<FK>> "サービスコードID"
+    int service_time "提供時間"
+  }
+
+  entity service_codes {
+    * binary id <<PK>>
+    --
+    string code "サービスコード"
+    int service_time "提供時間"
+  }
+  note bottom of service_codes
+    コードIDに応じてサービスコードを設定
+    1. 訪看I2
+    2. 訪看I3
+    ...
+  end note
+
+  entity visit_categories {
+    * binary id <<PK>>
+    --
+    string name "予定のカテゴリ"
+  }
+
+  note bottom of visit_categories
+  緊急訪問件数・入院件数をカウントする
+  複数選択するかどうかで、多:多の関係になる
+    1:夜勤
+    2:緊急
+    3:入院
+    ...
+  end note
+
+  entity routes {
+    * binary id <<PK>>
+    --
+    int travel_time "移動時間"
+    binary address_id <<FK>> "出発地の住所ID"
+    binary destination_id <<FK>> "目的地の住所ID"
+  }
+
+  note bottom of routes
+    出発地と目的地は、addressテーブルに対応させる？
+    ...
+  end note
+}
+
+package 患者情報 {
+  entity patients {}
+}
+
+visit_infos ||--|| service_codes
+visit_infos ||--|| patients
+visit_infos ||--|| routes
+visit_infos }|--o{ visit_categories
+
+@enduml

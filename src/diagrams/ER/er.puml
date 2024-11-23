@@ -7,4 +7,5 @@ skinparam linetype ortho
 !include ./tables/patients.puml
 !include ./tables/facilities.puml
 !include ./tables/policies.puml
+!include ./tables/visit_infos.puml
 @enduml

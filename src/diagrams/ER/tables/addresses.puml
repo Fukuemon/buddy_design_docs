@@ -10,8 +10,12 @@ package 住所 {
     * binary address_id <<PK>>
     --
     int zip_code "郵便番号"
-    string address "住所"
-    bi area_id <<FK>> "地域エリアID"
+    string prefecture "住所"
+    string city "市区町村"
+    string address_line1 "町名"
+    string address_line2 "番地"
+    string latitude "緯度"
+    string longitude "経度"
   }
 }
 
@@ -22,9 +26,16 @@ package エリア {
     string area_code "地域エリア名"
     binary facility_id <<FK>> "施設ID"
   }
+
+  entity areas_addresses {
+    * binary id <<PK>>
+    --
+    binary area_id <<FK>> "エリアID"
+    binary address_id <<FK>> "住所ID"
+  }
 }
 
-addresses }o--|| areas
+addresses }o--o{ areas
 areas }o--|| facilities
 
 
