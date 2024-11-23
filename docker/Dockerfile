@@ -3,13 +3,8 @@ FROM openjdk:11
 
 # 必要なツールとフォントをインストール
 RUN apt-get update && \
-    apt-get install -y graphviz fonts-noto-cjk && \
+    apt-get install -y graphviz fonts-noto-cjk plantuml && \
     mkdir -p /app/src/diagrams /app/src/diagrams-svg
-
-# PlantUMLのJarファイルをダウンロード
-# 最新バージョンのPlantUMLをダウンロード
-ADD https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar /usr/local/bin/plantuml.jar
-
 
 # 作業ディレクトリを設定
 WORKDIR /app
