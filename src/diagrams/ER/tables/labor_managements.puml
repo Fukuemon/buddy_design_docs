@@ -3,30 +3,33 @@ skinparam linetype ortho
 
 package 経営データ {
   entity labor_management_item_names {
-    * ulid id <<PK>>
+    経営数値の項目名
+    id: binary(16) <<PK>>
     --
-    string name "経営数値の項目名"
+    facility_id: binary(16) <<FK>> "施設ID"
+    name: string "項目名"
   }
 
   entity labor_management_items {
-    * ulid id <<PK>>
+    経営数値の項目ごとのデータ
+    id: binary(16) <<PK>>
     --
-    ulid facility_id <<FK>> "施設ID"
-    ulid monthly_labor_management_id <<FK>> "月次経営データID"
-    ulid labor_management_item_name_id <<FK>> "経営数値の項目名ID"
-    int data "データ"
-
+    monthly_labor_management_id: binary(16) <<FK>> "月次経営データID"
+    labor_management_item_name_id: binary(16) <<FK>> "経営数値の項目名ID"
+    data int "データの値"
   }
 
   note bottom of labor_management_items
-  算出はサーバーで行い、計算されたデータのみを保存する
+  項目ごとにデータを保存し、月次経営データと紐づける
   end note
 
-  entity manthry_labor_managements {
-    * ulid id <<PK>>
+  entity monthly_labor_managements {
+    月次経営データ
+    id binary(16) <<PK>>
     --
-    ulid facility_id <<FK>> "施設ID"
-    date month "月"
+    facility_id binary(16) <<FK>> "施設ID"
+    staff_id binary(16) <<FK>> "職員ID"
+    year_month date "年月"
   }
 }
 
@@ -35,10 +38,16 @@ package 施設情報 {
   }
 }
 
+package 職員情報 {
+  entity users {
+  }
+}
 
-manthry_labor_managements ||--o{ labor_management_items
-manthry_labor_managements ||--|| facilities
+
+monthly_labor_managements ||--o{ labor_management_items
+monthly_labor_managements ||--|| facilities
+monthly_labor_managements ||--|| users
 labor_management_items }o--|| labor_management_item_names
-labor_management_items ||--|| facilities
+labor_management_item_names ||--|| facilities
 
 @enduml

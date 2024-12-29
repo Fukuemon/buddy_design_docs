@@ -3,16 +3,16 @@ skinparam linetype ortho
 
 package 権限 {
   entity policies {
-    * binary id <<PK>>
+    id: binary(16) <<PK>>
     --
     string name "ポリシー名"
   }
 
   entity position_policies {
-    * binary id <<PK>>
+    id: binary(16) <<PK>>
     --
-    binary position_id <<FK>> "役職ID"
-    binary policy_id <<FK>> "ポリシーID"
+    position_id: binary(16) <<FK>> "役職ID"
+    policy_id: binary(16) <<FK>> "ポリシーID"
   }
   note bottom of position_policies
     役職ごとに設定されるデフォルトの権限
@@ -20,10 +20,10 @@ package 権限 {
   end note
 
   entity user_policies {
-    * binary id <<PK>>
+    id: binary(16) <<PK>>
     --
-    binary user_id <<FK>> "ユーザーID"
-    binary policy_id <<FK>> "ポリシーID"
+    staff_id: binary(16)  <<FK>> "ユーザーID"
+    policy_id: binary(16) <<FK>> "ポリシーID"
   }
   note bottom of user_policies
     ユーザーが持っている権限
@@ -31,10 +31,10 @@ package 権限 {
   end note
 
   entity user_policy_targets {
-    * binary id <<PK>>
+    id: binary(16) <<PK>>
     --
-    binary user_policy_id <<FK>> "ユーザーポリシーID"
-    binary target_user_id <<FK>> "ターゲットユーザーID"
+    user_policy_id: binary(16) <<FK>> "ユーザーポリシーID"
+    target_user_id: binary(16) <<FK>> "ターゲットユーザーID"
   }
   note bottom of user_policy_targets
     特定のユーザーポリシーに関連するターゲットユーザーの管理
