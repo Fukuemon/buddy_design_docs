@@ -2,23 +2,26 @@
 skinparam linetype ortho
 package 施設情報 {
   entity facilities {
-    * binary id <<PK>>
+    施設
+    id: binary(16) <<PK>>
     --
-    string name "施設名"
-    binary address_id <<FK>> "住所ID"
+    name: string "施設名"
+    address_id: binary(16) <<FK>> "住所ID"
   }
   entity positions {
-    * binary id <<PK>> "役職ID"
+    役職
+    id: binary(16) <<PK>>
     --
-    string name "役職名"
-    binary facility_id <<FK>> "施設ID"
+    name: string "役職名"
+    facility_id: binary(16) <<FK>> "施設ID"
   }
 
   entity teams {
-    * binary id <<PK>>
+    チーム
+    id: binary(16) <<PK>>
     --
-    string name "チーム名"
-    binary facility_id <<FK>> "施設ID"
+    name: string "チーム名"
+    facility_id: binary(16) <<FK>> "施設ID"
   }
 
   note bottom of positions
@@ -28,19 +31,20 @@ package 施設情報 {
   end note
 
   entity departments {
-    * binary id <<PK>>
+    部署
+    id: binary(16) <<PK>>
     --
-    string name "部署名"
-    binary facility_id <<FK>> "施設ID"
+    name: string "部署名"
+    facility_id: binary(16) <<FK>> "施設ID"
   }
 
   note bottom of departments
     1: 看護部
     2: リハビリ部
   end note
-  facilities ||--|| positions
-  facilities ||--|| teams
-  facilities ||--|| departments
+  facilities ||--o{ positions
+  facilities ||--o{ teams
+  facilities ||--o{ departments
 }
 
 

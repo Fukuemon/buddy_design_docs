@@ -3,33 +3,25 @@ skinparam linetype ortho
 
 package 予定 {
   entity schedules {
-    * binary schedule_id <<PK>>
+    schedule_id : binary(16) <<PK>> "スケジュールID"
     --
-    binary user_id "ユーザーID"
-    string title "予定のタイトル（NULL_OK)"
-    binary schedule_type_id <<FK>> "予定の種類"
-    binary recurring_schedule_id <<FK>>"繰り返し予定ID（NULL_OK)"
-    binary visit_info_id <<FK>> "訪問情報ID(NULL_OK)"
-    string description "予定の説明(NULL_OK)"
-    datetime visit_date "予定日（YYYY-MM-DD）"
-    datetime start_time "開始時間（HH:MM）"
-    datetime end_time "終了時間（HH:MM）"
-    boolean is_cancelled"キャンセルされたかどうか(default=false)"
-    boolean is_overtime_work "時間外勤務か(default=false)"
-    datetime before_change_date "変更前の訪問日（YYYY-MM-DD"
-    datetime before_change_start_time "変更前の開始時間（HH:MM）"
+    staff_id: binary(16) NOT_NULL "職員のID"
+    title: string  "予定のタイトル"
+    schedule_type_id: binary(16) NOT_NULL <<FK>> "予定の種類ID"
+    recurring_schedule_id: binary(16) <<FK>> "繰り返し予定ID"
+    visit_info_id: binary(16) <<FK>> "訪問情報ID"
+    description: string "予定の説明"
+    visit_date: date NOT_NULL "予定日（YYYY-MM-DD）"
+    start_time: time NOT_NULL "開始時間（HH:MM）"
+    end_time: time NOT_NULL "終了時間（HH:MM）"
+    schedule_cancel_id: binary(16)"キャンセル予定のid(NULL_OK)"
+    is_overtime_work: boolean NOT_NULL "時間外勤務か(default=false)"
   }
 
-  note bottom of schedules
-    繰り返し予定で特定の予定のみ変更された場合、
-    このテーブルに新しいレコードを追加する
-    その際に、繰り返し予定のIDと変更前の日時を保存する
-  end note
-
   entity schedule_types {
-    * binary schedule_type_id <<PK>>
+    schedule_type_id binary(16) <<PK>>
     --
-    string name "予定のタイプ名"
+    name string "予定のタイプ名"
   }
 
   note bottom of schedule_types
@@ -38,40 +30,40 @@ package 予定 {
   end note
 
   entity schedule_cancels {
-    * binary id <<PK>>
+    id: binary(16) <<PK>>
     --
-    binary schedule_id <<FK>> "キャンセルされた予定ID"
-    string cancel_reason "キャンセル理由"
-    datetime cancel_date "キャンセル日時"
+    schedule_id: binary(16) <<FK>> "キャンセルされた予定ID"
+    cancel_reason: string "キャンセル理由"
   }
 
   entity recurring_rules {
-    binary recurring_rule_id <<PK>>
+    recurring_rule_id (16) <<PK>> "繰り返しルールID"
     --
-    binary schedule_id: スケジュールID <<FK>>
-    int frequency: "繰り返し頻度（monthly, weekly)"
-    int day_of_week: "曜日"
-    int day_of_month: "月の日"
-    int week_of_month: "月の週"
-    datetime start_date: "開始日"
-    datetime end_date: "終了日"
+    frequency: int NOT_NULL "繰り返し頻度（monthly, weekly)をenumで扱う"
+    day_of_week: int "曜日"
+    day_of_month: int "月の日"
+    week_of_month: int "月の週"
+    start_date: date NOT_NULL "開始日"
+    end_date: date "終了日"
   }
   note top of recurring_rules
-  繰り返し予定のルールを定義する
+  月, 週のいずれかで、日付 or 第何週目の曜日かを指定する
+  月：day_of_month
+  週：week_of_month, day_of_week
   end note
 
   entity recurring_schedules {
-    binary recurring_schedule_id <<PK>>
+    recurring_schedule_id: binary(16) <<PK>> NOT_NULL
     --
-    binary recurring_rule_id: "繰り返しルールID"
-    binary schedule_type_id: "予定タイプID"
-    binary visit_info_id: "訪問情報ID"
-    binary schedule_category_id: "予定カテゴリID"
-    string title: "タイトル"
-    string description: "説明"
-    datetime visit_date: "訪問日"
-    datetime start_time: "開始時間"
-    datetime end_time: "終了時間"
+    recurring_rule_id: binary(16) NOT_NULL "繰り返しルールID"
+    schedule_type_id: binary(16) NOT_NULL "予定タイプID"
+    visit_info_id: binary(16) "訪問情報ID"
+    title: string "タイトル"
+    description: string "説明"
+    visit_date: date NOT_NULL"訪問日"
+    start_time: time NOT_NULL "開始時間"
+    end_time: time NOT_NULL "終了時間"
+    recurring_exclusion_dates: json "除外日のリスト"
   }
   note top of recurring_schedules
     繰り返し予定の情報を保存する
@@ -79,40 +71,25 @@ package 予定 {
   end note
 }
 
-package 住所 {
-  entity addresses
-}
 
 package 職員情報 {
   entity users {
   }
 }
 
-package 患者情報 {
-  entity patients {
-  }
-}
-
 package 訪問情報 {
   entity visit_infos {
   }
-  entity service_codes {
-  }
-  entity routes {
-  }
+
 }
 
 schedules }o--|| users
+schedules }o--|| schedule_types
 schedules ||--o| schedule_cancels
-schedules ||--|| schedule_rules
-schedules }|--o| recurring_schedules
 schedules ||--o| visit_infos
-recurring_schedules ||--o{ schedules
+recurring_schedules }o--|| users
+recurring_schedules }o--|| schedule_types
 recurring_schedules ||--|| recurring_rules
 recurring_schedules ||--|| visit_infos
-visit_infos ||--|| service_codes
-visit_infos ||--|| patients
-visit_infos ||--|| routes
-routes ||--|{ addresses
 
 @enduml

@@ -7,35 +7,38 @@ package 施設情報 {
 
 package 住所 {
   entity addresses {
-    * binary address_id <<PK>>
+    住所
+    address_id: binary(16) <<PK>>
     --
-    int zip_code "郵便番号"
-    string prefecture "住所"
-    string city "市区町村"
-    string address_line1 "町名"
-    string address_line2 "番地"
-    string latitude "緯度"
-    string longitude "経度"
+    zip_code: int "郵便番号"
+    prefecture: string "住所"
+    city string: "市区町村"
+    address_line1: string "番地までの住所"
+    address_line2: string "建物名"
+    latitude: string "緯度"
+    longitude: string "経度"
   }
 }
 
 package エリア {
   entity areas {
-    * binary id <<PK>>
+    特定の住所の範囲をグループ化したもの
+    id: binary(16) <<PK>>
     --
-    string area_code "地域エリア名"
-    binary facility_id <<FK>> "施設ID"
+    area_code: string "地域エリア名"
+    facility_id: binary(16) <<FK>> "施設ID"
   }
 
   entity areas_addresses {
-    * binary id <<PK>>
+    id: binary <<PK>>
     --
-    binary area_id <<FK>> "エリアID"
-    binary address_id <<FK>> "住所ID"
+    area_id: binary(16) <<FK>> "エリアID"
+    address_id: binary(16) <<FK>> "住所ID"
   }
 }
 
-addresses }o--o{ areas
+addresses ||--o{ areas_addresses
+areas ||--o{ areas_addresses
 areas }o--|| facilities
 
 

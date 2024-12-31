@@ -1,32 +1,30 @@
 @startuml entity-relationship-diagram
 skinparam linetype ortho
 
-entity auth_users {
-  * string username "ユーザー名"
+entity cognito_users {
+  Cognitoに保存されているユーザー情報（DBには保存しない）
+  username: string "ユーザー名"
   --
-  string phone_number "電話番号"
-  ENUM('男性', '女性') gender "性別"
-  binary area_id <<FK>> "担当エリアID"
-  binary position_id <<FK>> "役職ID"
-  binary team_id <<FK>> "チームID"
+  phone_number: string "電話番号"
+  email: string "メールアドレス"
+  area_id: binary(16) <<FK>> "担当エリアID"
+  position_id: binary(16) <<FK>> "役職ID"
+  team_id: binary(16) <<FK>> "チームID"
 }
-
-note bottom of auth_users
-  Cognitoのユーザー
-  DBにも保存しない
-end note
 
 package 職員情報 {
   entity users {
-    * binary id <<PK>>
+    id binary(16) NOT_NULL <<PK>> "CognitoのユーザーID"
     --
-    binary auth_user_id <<FK>> "CognitoユーザーID"
-    string username "ユーザー名"
-    string phone_number "電話番号"
-    ENUM('男性', '女性') gender "性別"
-    binary area_id <<FK>> "担当エリアID"
-    binary position_id <<FK>> "役職ID"
-    binary team_id <<FK>> "チームID"
+    username: string NOT_NULL "ユーザー名"
+    phone_number: string "電話番号"
+    email: string "メールアドレス"
+    gender: string NOT_NULL  "性別"
+    facility_id: binary(16) <<FK>> "施設ID"
+    area_id: binary(16) <<FK>> "担当エリアID"
+    position_id: binary(16) NOT_NULL <<FK>> "役職ID"
+    department_id: binary(16) NOT_NULL <<FK>> "部署ID"
+    team_id: binary(16) NOT_NULL <<FK>> "チームID"
   }
 
   note bottom of users
@@ -36,12 +34,13 @@ package 職員情報 {
   end note
 
   entity monthly_workings {
-    * binary working_data_id <<PK>>
+    職員に紐づく予定データから算出した月次の稼働時間
+    working_data_id binary(16) <<PK>>
     --
-    binary user_id <<FK>>
-    date month "稼働時間の月"
-    int monthly_visit_count "月の訪問回数"
-    int work_hours "勤務時間"
+    user_id binary(16) <<FK>>
+    year_month date "稼働時間の年月"
+    monthly_visit_count int "月の訪問回数"
+    work_hours int "勤務時間"
   }
 }
 
@@ -56,7 +55,7 @@ package 施設情報 {
   entity departments
 }
 
-auth_users ||--|| users
+cognito_users ||--|| users
 users ||--|| positions
 users ||--|| departments
 users ||--o{ monthly_workings
