@@ -9,20 +9,33 @@ Database Redis
 activate ユーザー
 ユーザー -> Front: ユーザー情報入力
 activate Front
-Front -> Gateway: Post：buddy.api.com/auth/login
-note left of Gateway:  -body: {username, password, facility_code}
+Front -> Gateway: Post：buddy.api.com/auth/login \n-body: {username, password}
+activate Gateway
+note right
+  ユーザー情報をAPIGatewayに送信
+end note
 Gateway -> Back: Post: /auth/login
-Back -> Cognito: ユーザー情報検証
-alt ログイン成功
-  Cognito --> Back: トークン返却
-  Back --> Redis: SessionID・トークン保存
-  Back --> Front: SessionId返却
-  Front --> Front: CookieにSessionIDを保存
-  Front --> ユーザー: /calendarへリダイレクト
-else ロウイン失敗
-  Front --> ユーザー: エラーメッセージを表示
-end
+activate Back
+Back -> Cognito: InitiateAuth(username, password)
 
+activate Cognito
+Cognito --> Back: accessToken返却
+deactivate Cognito
+
+Back -> Redis: {SessionId: accessToken}を保存
+activate Redis
+Redis --> Back: 保存完了
+deactivate Redis
+
+Back --> Gateway: SessionId返却
+deactivate Back
+
+Gateway --> Front: SessionId返却
+deactivate Gateway
+
+Front --> Front: CookieにSessionIDを保存
+Front --> ユーザー: /calendarへリダイレクト
+deactivate Front
 deactivate ユーザー
 
 

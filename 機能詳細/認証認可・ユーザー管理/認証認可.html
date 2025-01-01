@@ -163,8 +163,15 @@
 → 成功した場合 Backend 側で認可処理を行う</p>
 <img src="../../diagrams-svg/Sequence/Auth/Login.svg" width="1200px">
 <h2 id="認可"><a class="header" href="#認可">認可</a></h2>
-<p>リクエストからユーザー情報を受け取り、ユーザーの権限を確認して実行可否を判定する</p>
+<p>リクエストからユーザー情報を受け取り、ユーザーの権限を確認して実行可否を判定する
+案として、二つの実装方法が考えられる</p>
+<h3 id="authorizerlambda-を利用する場合"><a class="header" href="#authorizerlambda-を利用する場合">Authorizer（Lambda） を利用する場合</a></h3>
+<p>認可の一部を Authorizer に移譲することができる。
+ただ、ユーザーの権限によって取得するリソースが変わったりするため、権限チェックは Backend で行う必要がある？</p>
 <img src="../../diagrams-svg/Sequence/Auth/Auth.svg" width="1200px">
+<h3 id="authorizer-を利用しない場合"><a class="header" href="#authorizer-を利用しない場合">Authorizer を利用しない場合</a></h3>
+<p>認可を Backend で全て担うパターン
+<img src="../../diagrams-svg/Sequence/Auth/Auth2.svg" width="1200px"></p>
 
                     </main>
 
