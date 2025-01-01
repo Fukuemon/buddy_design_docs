@@ -2,9 +2,10 @@
 Actor ユーザー
 Participant Frontend as Front
 Participant APIGateway as Gateway
-Participant Backend as Back
-Database Redis
+Participant Lambda
 Participant Cognito
+Database Redis
+Participant Backend as Back
 Participant DB
 
 ユーザー -> Front: Action
@@ -16,34 +17,44 @@ sessionIDを元に、
 end note
 
 activate Gateway
-Gateway -> Back: Get: /schedules -header: {sessionId: SessionID}
-activate Back
-Back -> Redis: getAccessToken(sessionID: sessionID)
+Gateway -> Lambda: Lambda Authorizer
+note right
+Lambda Authorizerで、
+トークン検証の処理を呼ぶ
+end note
+
+activate Lambda
+Lambda -> Redis: getAccessToken(sessionID: sessionID)
 
 activate Redis
-Redis --> Back: accessToken
+Redis --> Lambda: accessToken
 note right
 セッションIDに紐づくアクセストークンを取得
 存在しない場合は、エラーを返す
 end note
 deactivate Redis
 
-Back -> Cognito: GetUser(accessToken: accessToken)
+Lambda -> Cognito: GetUser(accessToken: accessToken)
 note right
 アクセストークンを元に、職員（ユーザー）情報を取得
 失敗した場合、エラーを返す
 end note
 activate Cognito
-Cognito --> Back: 職員情報返却
+Cognito --> Lambda: 職員情報返却
 deactivate Cognito
 
-Back-> DB: 職員の権限取得
+Lambda --> Gateway: 認証結果 & 職員IDを返却
+deactivate Lambda
+
+Gateway -> Back: （成功時）Get: /schedules -header: {userID: userID}
+activate Back
+Back -> DB: 職員情報取得
 activate DB
-DB --> Back: 権限情報を返却
+DB --> Back: 職員情報返却
 deactivate DB
 Back --> Back: 職員の権限情報を確認
 note right
-職員に権限があるか確認
+バックエンドでは、リクエストから権限情報を確認する
 成功時、処理を実行し、レスポンスを返す
 end note
 
